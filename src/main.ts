@@ -65,8 +65,6 @@ async function bootstrap() {
   // 创建文档
   generateDocument(app)
 
-  app.useGlobalPipes(new ValidationPipe());
-
   // 启动服务
   await app.listen(3000);
 
