@@ -10,6 +10,8 @@ import {
 import fastify from 'fastify';
 import * as cookieParser from 'cookie-parser';
 
+import { VERSION_NEUTRAL } from '@nestjs/common'
+
 import { generateDocument } from './doc'
 import { FastifyLogger, } from './common/logger';
 import { catchError } from './common/logger/catchError';
@@ -17,7 +19,7 @@ import { AllExceptionsFilter } from './common/exceptions/base.exception.filter';
 import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
-import fastifyCookie from 'fastify-cookie';
+import fastifyCookie from '@fastify/cookie';
 
 catchError()
 
