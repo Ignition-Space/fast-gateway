@@ -54,7 +54,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // 统一响应体格式
-  app.useGlobalInterceptors(new TransformInterceptor());
+  // app.useGlobalInterceptors(new TransformInterceptor());
 
   // 接口版本化管理
   app.enableVersioning({

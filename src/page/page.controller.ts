@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Res, Query, Inject } from '@nestjs/common';
+import { Controller, Post, Body, Get, Res, Query, Inject, StreamableFile } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { addPageDto, } from './page.dto';
 import { PageService } from './page.service';
@@ -6,8 +6,10 @@ import { ConfigService } from '@nestjs/config';
 import { PageConfigService } from './page-config/page-config.service';
 import { DeployConfigService } from './deploy-config/deploy-config.service';
 import { ClientProxy } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
-
+import { IsStream } from '@/common/constants';
+import { createReadStream } from 'fs';
+import { join } from 'path';
+import { Public } from '@/auth/constants';
 
 @ApiTags('页面属性配置')
 @Controller('page')
@@ -70,6 +72,22 @@ export class PageController {
     };
   }
 
+  @Public()
+  @Post('getData')
+  async getData() {
+    return {
+      filePath: join(process.cwd(), 'package.json')
+    }
+  }
+
+  @IsStream()
+  @Public()
+  @Get('getStream')
+  getStream(): StreamableFile {
+    console.log(join(process.cwd(), 'package.json'))
+    const file = createReadStream(join(process.cwd(), 'package.json'));
+    return new StreamableFile(file);
+  }
 
   @Post('updateOne')
   async updateOne(@Body() params: addPageDto) {
