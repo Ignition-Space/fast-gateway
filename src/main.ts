@@ -10,6 +10,8 @@ import {
 import fastify from 'fastify';
 import * as cookieParser from 'cookie-parser';
 
+import { VERSION_NEUTRAL } from '@nestjs/common'
+
 import { generateDocument } from './doc'
 import { FastifyLogger, } from './common/logger';
 import { catchError } from './common/logger/catchError';
@@ -52,7 +54,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // 统一响应体格式
-  app.useGlobalInterceptors(new TransformInterceptor());
+  // app.useGlobalInterceptors(new TransformInterceptor());
 
   // 接口版本化管理
   app.enableVersioning({
