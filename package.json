@@ -22,6 +22,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@fastify/cookie": "^7.0.0",
     "@nestjs/axios": "^0.0.8",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.0.0",
@@ -31,7 +32,7 @@
     "@nestjs/mongoose": "^9.0.3",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.0.0",
-    "@nestjs/platform-fastify": "^8.4.4",
+    "@nestjs/platform-fastify": "^9.0.1",
     "@nestjs/swagger": "^5.2.1",
     "@types/cache-manager": "^3.4.3",
     "cache-manager": "^3.6.1",
@@ -43,7 +44,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.0",
     "fast-json-parse": "^1.0.3",
-    "fastify-cookie": "^5.6.1",
+    "fastify-static": "^4.7.0",
     "fastify-swagger": "^5.1.0",
     "fs-extra": "^10.0.1",
     "lodash": "^4.17.21",
