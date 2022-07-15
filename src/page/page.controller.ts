@@ -10,6 +10,7 @@ import { IsStream } from '@/common/constants';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 import { Public } from '@/auth/constants';
+const log = require('pino')({ level: 'info' })
 
 @ApiTags('页面属性配置')
 @Controller('page')
@@ -75,6 +76,8 @@ export class PageController {
   @Public()
   @Post('getData')
   async getData() {
+    log.info('Doing something with package.json');
+
     return {
       filePath: join(process.cwd(), 'package.json')
     }
