@@ -1,4 +1,4 @@
-import { Entity, Column, UpdateDateColumn, ObjectIdColumn } from 'typeorm';
+import { Entity, Column, UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum UserStatus {
   disabled = 0,
@@ -7,7 +7,7 @@ export enum UserStatus {
 
 @Entity()
 export class User {
-  @ObjectIdColumn()
+  @PrimaryGeneratedColumn()
   id?: number;
 
   @Column({ default: null })

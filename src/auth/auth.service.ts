@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { JwtService } from '@nestjs/jwt';
-import { FeishuUserInfo } from 'src/user/feishu/feishu.dto';
-import { FeishuService } from 'src/user/feishu/feishu.service';
-import { User } from '@/user/user.mongo.entity';
-import { UserService } from 'src/user/user.service';
+import { FeishuUserInfo } from '@/userCenter/user/feishu/feishu.dto';
+import { FeishuService } from '@/userCenter/user/feishu/feishu.service';
+import { User } from '@/userCenter/user/user.mysql.entity';
+import { UserService } from '@/userCenter/user/user.service';
 
 @Injectable()
 export class AuthService {

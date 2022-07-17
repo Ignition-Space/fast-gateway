@@ -1,8 +1,3 @@
-/*
- * @Author: Cookie
- * @Description: 
- */
-
 declare class PaginationParams {
   currentPage: number;
   pageSize: number;

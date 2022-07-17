@@ -1,10 +1,14 @@
-/*
- * @Author: Cookie
- * @Description: 
- */
 import { IPaginationOptions, IPaginationMeta } from 'nestjs-typeorm-paginate';
 import { defaultPaginationParams, MAX_PAGE_SIZE } from './constants';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+export class CustomPaginationMeta {
+  constructor(
+    public readonly pageSize: number,
+    public readonly totalCounts: number,
+    public readonly totalPages: number,
+    public readonly currentPage: number,
+  ) { }
+}
 
 export const getPaginationOptions = (
   page: PaginationParams = {
@@ -17,7 +21,6 @@ export const getPaginationOptions = (
   const options: IPaginationOptions<CustomPaginationMeta> = {
     page: page.currentPage,
     limit,
-    // 自定义 meta 信息
     metaTransformer: (meta: IPaginationMeta): CustomPaginationMeta => {
       return new CustomPaginationMeta(
         meta.itemCount,

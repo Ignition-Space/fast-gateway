@@ -1,4 +1,4 @@
-import { methodV } from 'src/utils/request';
+import { methodV } from '@/utils/request';
 
 export const getUserInfo = async (user_token: string) => {
   const { data } = await methodV({

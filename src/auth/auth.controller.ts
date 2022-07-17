@@ -13,10 +13,10 @@ import {
 import { FeishuAuthGuard } from './guards/feishu-auth.guard';
 import { AuthService } from './auth.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { GetTokenByApplications, LoginDto } from './auth.dto';
+import { GetTokenByApplications } from './auth.dto';
 import { Public } from './constants';
 import { PayloadUser } from '@/helper';
-import { FeishuService } from 'src/user/feishu/feishu.service';
+import { FeishuService } from '@/userCenter/user/feishu/feishu.service';
 import { FastifyReply } from 'fastify'
 
 @ApiTags('用户认证')
@@ -49,8 +49,13 @@ export class AuthController {
     @Res({ passthrough: true }) response: FastifyReply,
     @Query() query: GetTokenByApplications,
   ) {
+
     const { access_token } = await this.authService.login(user);
-    response.setCookie('jwt', access_token);
+
+    response.setCookie('jwt', access_token, {
+      path: '/',
+    });
+
     return access_token
   }
 

@@ -1,4 +1,4 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { DatabaseModule } from '@/common/database/database.module';
 import { PageController } from './page.controller';
 import { PageProviders } from './page.providers';

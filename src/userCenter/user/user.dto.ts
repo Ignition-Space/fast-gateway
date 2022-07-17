@@ -5,6 +5,7 @@
 
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+import { PaginationParams } from 'types/type';
 
 export class DisableUserDto {
   @IsNotEmpty()
@@ -54,4 +55,14 @@ export class GetPrivilegeListDto {
 
   @IsNotEmpty()
   systemId: number;
+}
+
+export class UserListWithPaginationDto {
+
+  keyword?: string;
+
+  creatorIds?: string[];
+
+  @ApiProperty({ example: { pageSize: 10, currentPage: 1 } })
+  page?: PaginationParams;
 }

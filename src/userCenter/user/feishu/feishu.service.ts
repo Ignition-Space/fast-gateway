@@ -1,16 +1,15 @@
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import {
   getAppToken,
-  getUserAccessToken,
   getUserToken,
   refreshUserToken,
-} from 'src/helper/feishu/auth';
+} from '@/helper/feishu/auth';
 import { Cache } from 'cache-manager';
 import { FeishuUserInfo, GetUserTokenDto } from './feishu.dto';
 import { BusinessException } from '@/common/exceptions/business.exception';
 import { FeishuHttpException } from '@/common/exceptions/feishu.exception';
 import { BUSINESS_ERROR_CODE } from '@/common/exceptions/business.error.codes';
-import { getSingleUserInfo, getUserListByDepartmentId } from 'src/helper/feishu/user';
+import { getSingleUserInfo, getUserListByDepartmentId } from '@/helper/feishu/user';
 import { ConfigService } from '@nestjs/config';
 import { messages } from '@/helper/feishu/message';
 
@@ -144,7 +143,6 @@ export class FeishuService {
     }
     return data;
   }
-
 }
 
 
