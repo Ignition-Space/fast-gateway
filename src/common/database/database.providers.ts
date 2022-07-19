@@ -8,6 +8,13 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { getConfig } from '@/utils/index'
 import { NamingStrategy } from './naming.strategies';
 import { PageConfig } from '@/materials/page/page-config/page-config.mongo.entity';
+import { Privilege } from '@/userCenter/privilege/privilege.mysql.entity'
+import { Resource } from '@/userCenter/resource/resource.mysql.entity'
+import { Role } from '@/userCenter/role/role.mysql.entity'
+import { RolePrivilege } from '@/userCenter/role-privilege/role-privilege.mysql.entity'
+import { System } from '@/userCenter/system/system.mysql.entity'
+import { User } from '@/userCenter/user/user.mysql.entity'
+import { UserRole } from '@/userCenter/user-role/user-role.mysql.entity'
 
 const path = require('path');
 
@@ -17,18 +24,21 @@ const { MONGODB_CONFIG, MYSQL_CONFIG } = getConfig()
 const MONGODB_DATABASE_CONFIG = {
   ...MONGODB_CONFIG,
   NamedNodeMap: new NamingStrategy(),
-  entities: [path.join(__dirname, `../../**/*.${MONGODB_CONFIG.entities}.entity{.ts,.js}`)], // 自动加载实体
-  // entities: [PageConfig] // 手动引入实体
+  // entities: [path.join(__dirname, `../../**/*.${MONGODB_CONFIG.entities}.entity{.ts,.js}`)], // 自动加载实体
+  entities: [PageConfig]
 }
 
 const MYSQL_DATABASE_CONFIG = {
   ...MYSQL_CONFIG,
   NamedNodeMap: new NamingStrategy(),
-  entities: [path.join(__dirname, `../../**/*.${MYSQL_CONFIG.entities}.entity{.ts,.js}`)],
+  // entities: [path.join(__dirname, `../../**/*.${MYSQL_CONFIG.entities}.entity{.ts,.js}`)],
+  entities: [Privilege, Resource, Role, RolePrivilege, System, User, UserRole]
 }
 
 const MONGODB_DATA_SOURCE = new DataSource(MONGODB_DATABASE_CONFIG)
 const MYSQL_DATA_SOURCE = new DataSource(MYSQL_DATABASE_CONFIG)
+
+console.log('MYSQL_DATA_SOURCE===>', MYSQL_DATA_SOURCE)
 
 // 数据库注入
 export const DatabaseProviders = [

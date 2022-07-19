@@ -1,9 +1,9 @@
-import { Resource } from './resource.entity';
+import { Resource } from './resource.mysql.entity';
 
 export const ResourceProviders = [
   {
     provide: 'RESOURCE_REPOSITORY',
-    useFactory: async (AppDataSource) => await AppDataSource.getRepository(Resource),
+    useFactory: (AppDataSource) => AppDataSource.getRepository(Resource),
     inject: ['MYSQL_DATA_SOURCE'],
   },
 ];

@@ -3,7 +3,6 @@ import { DatabaseModule } from '@/common/database/database.module';
 import { PageController } from './page.controller';
 import { PageProviders } from './page.providers';
 import { PageService } from './page.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { PageConfigService } from './page-config/page-config.service';
 import { PageConfigController } from './page-config/page-config.controller';
@@ -23,7 +22,6 @@ import { ClientProxyFactory, ClientsModule, Transport } from '@nestjs/microservi
       },
     ]),
     DatabaseModule,
-    ConfigModule
   ],
   controllers: [
     PageConfigController,
