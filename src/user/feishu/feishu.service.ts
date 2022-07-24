@@ -9,6 +9,7 @@ import { Cache } from 'cache-manager';
 import { BusinessException } from '@/common/exceptions/business.exception';
 import { ConfigService } from '@nestjs/config';
 import { messages } from '@/helper/feishu/message';
+import { GetUserTokenDto } from './feishu.dto';
 
 @Injectable()
 export class FeishuService {
@@ -42,4 +43,17 @@ export class FeishuService {
     const app_token = await this.getAppToken()
     return messages(receive_id_type, params, app_token as string)
   }
+  async getUserToken(code: string) {
+    const app_token = await this.getAppToken()
+    const dto: GetUserTokenDto = {
+      code,
+      app_token
+    };
+    const res: any = await getUserToken(dto);
+    if (res.code !== 0) {
+      throw new BusinessException(res.msg);
+    }
+    return res.data;
+  }
+
 }
