@@ -8,10 +8,13 @@ export const getEnv = () => {
 }
 
 // 读取项目配置
-export const getConfig = () => {
+export const getConfig = (type?: string) => {
   const environment = getEnv()
   const yamlPath = path.join(process.cwd(), `./.config/.${environment}.yaml`)
   const file = fs.readFileSync(yamlPath, 'utf8')
   const config = parse(file)
+  if (type) {
+    return config[type]
+  }
   return config
 }
