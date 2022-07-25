@@ -1,6 +1,6 @@
 /*
  * @Author: Cookie
- * @Description: 
+ * @Description: fastify hook 拦截
  */
 
 export const fastHook = (fastify: any) => {

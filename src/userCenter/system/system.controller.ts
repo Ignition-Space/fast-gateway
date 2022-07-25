@@ -3,7 +3,6 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BusinessException } from '@/common/exceptions/business.exception';
 import { CreateSystemDto, DeleteSystemDto, UpdateSystemDto } from './system.dto';
 import { SystemService } from './system.service';
-import { Payload } from '@nestjs/microservices';
 import { PayloadUser } from '@/helper';
 
 @ApiTags('系统')

@@ -1,6 +1,6 @@
-import { Controller, Post, Body, Query, Get } from '@nestjs/common';
+import { Controller, Post, Body, } from '@nestjs/common';
 import { UserService } from './user.service';
-import { IToken, GetUserListDto, UserListWithPaginationDto, GetPrivilegeListDto, GetRolesByIdDto, SetRolesDto, DisableUserDto } from './user.dto';
+import { UserListWithPaginationDto, GetRolesByIdDto, SetRolesDto, DisableUserDto } from './user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PayloadUser } from '@/helper';
 import { UserRoleService } from '../user-role/user-role.service';
@@ -32,14 +32,6 @@ export class UserController {
       throw new BusinessException(`未找到 ID 为 ${dto.userId} 的用户`);
     }
     return this.userService.createOrSave({ ...found, status: dto.status });
-  }
-
-  @ApiOperation({
-    summary: '用户列表',
-  })
-  @Post('/list')
-  async getUserList(@Body() getUserListDto: GetUserListDto) {
-    return this.userService.getUserList(getUserListDto);
   }
 
   @ApiOperation({

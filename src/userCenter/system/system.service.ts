@@ -1,7 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { isNotEmpty } from 'class-validator';
 import { In, Repository } from 'typeorm';
-import { CreateSystemDto } from './system.dto';
 import { System } from './system.mysql.entity';
 
 @Injectable()

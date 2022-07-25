@@ -1,11 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
-import { Action } from "rxjs/internal/scheduler/Action";
 import { PaginationParams } from "types/type";
-
+import { Action, PrivilegeStatus } from "./privilege.mysql.entity";
 export class CreatePrivilegeDto {
-
-  @ApiProperty({ example: '2', description: '系统id' })
+  @ApiProperty({ example: '2', description: '系统ID' })
   @IsNotEmpty()
   systemId: number;
 
@@ -23,48 +21,32 @@ export class CreatePrivilegeDto {
   @ApiProperty({ example: 'read', enum: Action })
   @IsNotEmpty()
   action: string;
-
 }
 
 export class DeletePrivilegeDto {
   @IsNotEmpty()
+  @ApiProperty({ example: '1', description: '权限ID' })
   privilegeId: number;
 }
 
 export class DisablePrivilegeDto {
   @IsNotEmpty()
+  @ApiProperty({ example: '1', description: '权限ID' })
   privilegeId: number;
+
   @IsNotEmpty()
+  @ApiProperty({ example: '1', description: '权限状态', enum: PrivilegeStatus })
   status: number;
 }
 
-export class UpdatePrivilegeDto {
-
+export class UpdatePrivilegeDto extends CreatePrivilegeDto {
   @IsNotEmpty()
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: '1', description: '权限ID' })
   id: number;
-
-  @IsNotEmpty()
-  systemId: number;
-
-  @ApiProperty({ example: '项目发布' })
-  @IsNotEmpty()
-  name: string;
-
-  @ApiProperty({ example: '用于项目的发布权限' })
-  description: string;
-
-  @ApiProperty({ example: 'project' })
-  @IsNotEmpty()
-  resourceKey: string;
-
-  @ApiProperty({ example: 'publish' })
-  @IsNotEmpty()
-  action: string;
 }
 
-
 export class PrivilegeListWithPaginationDto {
+  @ApiProperty({ example: '', description: '查询关键词' })
   keyword?: string;
 
   @ApiProperty({ example: { pageSize: 10, currentPage: 1 } })
@@ -73,5 +55,6 @@ export class PrivilegeListWithPaginationDto {
 
 export class ListAllPrivilegeDto {
   @IsNotEmpty()
+  @ApiProperty({ example: '2', description: '系统ID' })
   systemId: number;
 }

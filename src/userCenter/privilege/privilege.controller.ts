@@ -49,6 +49,7 @@ export class PrivilegeController {
     }
 
     const privilege = await this.privilegeService.findById(dto.id)
+
     if (!privilege) {
       throw new BusinessException(`未找到 id 为 ${dto.id} 的权限`);
     }

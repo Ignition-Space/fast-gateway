@@ -53,9 +53,6 @@ async function bootstrap() {
   // 格式化 cookie
   app.use(cookieParser());
 
-  // 统一响应体格式
-  // app.useGlobalInterceptors(new TransformInterceptor());
-
   // 接口版本化管理
   app.enableVersioning({
     type: VersioningType.URI,

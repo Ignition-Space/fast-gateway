@@ -1,7 +1,7 @@
 import { In, Like, Raw, Repository } from 'typeorm';
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { User } from './user.mysql.entity';
-import { GetUserListDto, UserListWithPaginationDto } from './user.dto';
+import { UserListWithPaginationDto } from './user.dto';
 import { isNotEmpty } from 'class-validator';
 import { FeishuUserInfo } from '@/userCenter/user/feishu/feishu.dto';
 import { BusinessException } from '@/common/exceptions/business.exception';
@@ -52,31 +52,12 @@ export class UserService {
     return this.userRepository.findOneBy(userId);
   }
 
-  getUserList(getUserListDto: GetUserListDto) {
-    return this.userRepository.find({
-      where: [
-        {
-          name: isNotEmpty(getUserListDto.keyword)
-            ? Like(`%${getUserListDto.keyword}%`)
-            : Raw(() => '1=1'),
-        },
-        {
-          username: isNotEmpty(getUserListDto.keyword)
-            ? Like(`%${getUserListDto.keyword}%`)
-            : Raw(() => '1=1'),
-        },
-      ],
-      take: 20,
-    });
-  }
-
   async paginate(
     searchParams: UserListWithPaginationDto,
     page: PaginationParams,
   ): Promise<Pagination<User, CustomPaginationMeta>> {
     const queryBuilder = this.userRepository.createQueryBuilder('user');
     queryBuilder.orderBy('user.updateTime', 'DESC');
-    // 关键字
     if (isNotEmpty(searchParams.keyword)) {
       queryBuilder.andWhere('user.name LIKE :name', {
         name: `%${searchParams.keyword}%`,
@@ -90,7 +71,6 @@ export class UserService {
       getPaginationOptions(page),
     );
   }
-
 
   getUserListByEmails(emailList: string[]) {
     return this.userRepository.find({

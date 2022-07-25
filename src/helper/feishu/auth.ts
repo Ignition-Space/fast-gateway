@@ -10,6 +10,9 @@ export type GetAppTokenRes = {
   expire: number;
 };
 
+/**
+ * @description: 获取用户 token
+ */
 export const getUserToken = async ({ code, app_token }) => {
   const { data } = await methodV({
     url: `/authen/v1/access_token`,
@@ -25,6 +28,9 @@ export const getUserToken = async ({ code, app_token }) => {
   return data;
 };
 
+/**
+ * @description: 刷新用户 token
+ */
 export const refreshUserToken = async ({ refreshToken, app_token }) => {
   const { data } = await methodV({
     url: `/authen/v1/refresh_access_token`,

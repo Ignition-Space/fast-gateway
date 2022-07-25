@@ -38,8 +38,6 @@ const MYSQL_DATABASE_CONFIG = {
 const MONGODB_DATA_SOURCE = new DataSource(MONGODB_DATABASE_CONFIG)
 const MYSQL_DATA_SOURCE = new DataSource(MYSQL_DATABASE_CONFIG)
 
-console.log('MYSQL_DATA_SOURCE===>', MYSQL_DATA_SOURCE)
-
 // 数据库注入
 export const DatabaseProviders = [
   {

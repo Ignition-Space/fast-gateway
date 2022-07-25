@@ -13,7 +13,6 @@ import { getSingleUserInfo, getUserListByDepartmentId } from '@/helper/feishu/us
 import { ConfigService } from '@nestjs/config';
 import { messages } from '@/helper/feishu/message';
 
-
 @Injectable()
 export class FeishuService {
 

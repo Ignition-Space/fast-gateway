@@ -8,6 +8,7 @@ export class UserRoleService {
     @Inject('USER_ROLE_REPOSITORY')
     private userRoleRepository: Repository<UserRole>,
   ) { }
+
   listByUserId(userId: number, systemId: number) {
     return this.userRoleRepository.find({
       where: {
@@ -16,12 +17,14 @@ export class UserRoleService {
       }
     })
   }
+
   deleteByUserId(userId: number, systemId: number) {
     return this.userRoleRepository.delete({
       userId,
       systemId
     })
   }
+
   async setUserRoles(userId: number, roleIds: number[], systemId: number) {
     const userRoles: UserRole[] = roleIds.map(roleId => {
       return {

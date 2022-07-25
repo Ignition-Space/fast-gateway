@@ -4,7 +4,7 @@ import { paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { getPaginationOptions } from '@/helper';
 import { In, Repository } from 'typeorm';
 import { PrivilegeListWithPaginationDto } from './privilege.dto';
-import { Privilege, PrivilegeStatus } from './privilege.mysql.entity';
+import { Privilege } from './privilege.mysql.entity';
 
 @Injectable()
 export class PrivilegeService {
@@ -59,6 +59,4 @@ export class PrivilegeService {
       getPaginationOptions(page),
     );
   }
-
-
 }

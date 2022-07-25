@@ -4,6 +4,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 export class Resource {
   @PrimaryGeneratedColumn()
   id?: number;
+
   @Column()
   name: string;
 

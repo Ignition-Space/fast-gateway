@@ -13,13 +13,7 @@ export class ResourceService {
   ) {
 
   }
-  create(dto: CreateResourceDto) {
-    const resource: Resource = {
-      systemId: dto.systemId,
-      parentId: dto.parentId,
-      name: dto.name,
-      key: dto.key
-    }
+  create(resource: Resource) {
     return this.resourceRepository.save(resource)
   }
 
@@ -30,7 +24,6 @@ export class ResourceService {
   delete(id: number) {
     return this.resourceRepository.delete(id);
   }
-
 
   findById(id) {
     return this.resourceRepository.findOneBy(id)
