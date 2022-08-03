@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { MongoRepository } from 'typeorm';
+import { MongoRepository, ObjectID } from 'typeorm';
 import { Page } from './page.mongo.entity';
-import { ObjectID } from 'mongodb'
 import { STATUS_TYPE } from './page.mongo.entity';
 
 @Injectable()
@@ -11,7 +10,7 @@ export class PageService {
     private pageRepository: MongoRepository<Page>,
   ) { }
 
-  save(page) {
+  saveAndUpdate(page) {
     return this.pageRepository.save(page)
   }
 

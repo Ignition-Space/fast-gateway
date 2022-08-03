@@ -1,12 +1,6 @@
-/*
- * @Author: hbh
- * @Date: 2022-01-06 17:17:42
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2022-07-17 19:42:27
- */
 import { Page } from './page.mongo.entity';
-import { PageConfig } from './page-config/page-config.mongo.entity';
-import { DeployTestConfig } from './deploy-config/deploy-config.mongo.entity';
+import { PageConfig } from './pageConfig/pageConfig.mongo.entity';
+import { DeployTestConfig } from './deployConfig/deployConfig.mongo.entity';
 
 export const PageProviders = [
   {

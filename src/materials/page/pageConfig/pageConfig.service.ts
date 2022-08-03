@@ -1,8 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { MongoRepository } from 'typeorm';
-import { CreatePageConfigDto } from './dto/create-page-config.dto';
-import { UpdatePageConfigDto } from './dto/update-page-config.dto';
-import { PageConfig } from './page-config.mongo.entity';
+import { PageConfig } from './pageConfig.mongo.entity';
 
 @Injectable()
 export class PageConfigService {
@@ -29,7 +27,7 @@ export class PageConfigService {
     return this.pageConfigRepository.findOne(id)
   }
 
-  update(id: number, updatePageConfigDto: UpdatePageConfigDto) {
+  update(id: number, updatePageConfigDto) {
     return `This action updates a #${id} pageConfig`;
   }
 

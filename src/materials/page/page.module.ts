@@ -4,9 +4,9 @@ import { PageController } from './page.controller';
 import { PageProviders } from './page.providers';
 import { PageService } from './page.service';
 
-import { PageConfigService } from './page-config/page-config.service';
-import { PageConfigController } from './page-config/page-config.controller';
-import { DeployConfigService } from './deploy-config/deploy-config.service';
+import { PageConfigService } from './pageConfig/pageConfig.service';
+import { PageConfigController } from './pageConfig/pageConfig.controller';
+import { DeployConfigService } from './deployConfig/deployConfig.service';
 import { ClientProxyFactory, ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({

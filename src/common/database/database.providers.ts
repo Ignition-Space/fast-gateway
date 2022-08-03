@@ -7,7 +7,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 
 import { getConfig } from '@/utils/index'
 import { NamingStrategy } from './naming.strategies';
-import { PageConfig } from '@/materials/page/page-config/page-config.mongo.entity';
+import { PageConfig } from '@/materials/page/pageConfig/pageConfig.mongo.entity';
 import { Privilege } from '@/userCenter/privilege/privilege.mysql.entity'
 import { Resource } from '@/userCenter/resource/resource.mysql.entity'
 import { Role } from '@/userCenter/role/role.mysql.entity'
@@ -24,8 +24,8 @@ const { MONGODB_CONFIG, MYSQL_CONFIG } = getConfig()
 const MONGODB_DATABASE_CONFIG = {
   ...MONGODB_CONFIG,
   NamedNodeMap: new NamingStrategy(),
-  // entities: [path.join(__dirname, `../../**/*.${MONGODB_CONFIG.entities}.entity{.ts,.js}`)], // 自动加载实体
-  entities: [PageConfig]
+  entities: [path.join(__dirname, `../../**/*.${MONGODB_CONFIG.entities}.entity{.ts,.js}`)], // 自动加载实体
+  // entities: [PageConfig]
 }
 
 const MYSQL_DATABASE_CONFIG = {

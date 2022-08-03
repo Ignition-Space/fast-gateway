@@ -1,5 +1,4 @@
 import { CacheModule, Module } from '@nestjs/common';
-import { PageModule } from './materials/page/page.module';
 import { AuthModule } from './auth/auth.module';
 
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
@@ -9,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import * as redisStore from 'cache-manager-redis-store';
 import { getConfig } from './utils';
+import { materialsModule } from './materials/materials.module';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { getConfig } from './utils';
       load: [getConfig]
     }),
     AuthModule,
-    PageModule
+    materialsModule
   ],
   controllers: [],
   providers: [

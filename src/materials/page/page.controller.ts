@@ -1,13 +1,11 @@
-import { Controller, Post, Body, Get, Res, Query, Inject, StreamableFile } from '@nestjs/common';
+import { Controller, Post, Body, Get, Inject, } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { addPageDto, } from './page.dto';
 import { PageService } from './page.service';
 import { ConfigService } from '@nestjs/config';
-import { PageConfigService } from './page-config/page-config.service';
-import { DeployConfigService } from './deploy-config/deploy-config.service';
+import { PageConfigService } from './pageConfig/pageConfig.service';
+import { DeployConfigService } from './deployConfig/deployConfig.service';
 import { ClientProxy } from '@nestjs/microservices';
-import { IsStream } from '@/common/constants';
-import { createReadStream } from 'fs';
 import { join } from 'path';
 import { Public } from '@/auth/constants';
 const log = require('pino')({ level: 'info' })
@@ -15,7 +13,6 @@ const log = require('pino')({ level: 'info' })
 @ApiTags('页面属性配置')
 @Controller('page')
 export class PageController {
-
   constructor(
     private pageService: PageService,
     private configService: ConfigService,
@@ -25,16 +22,9 @@ export class PageController {
   ) {
   }
 
-  @Get('getMath')
-  async getMath() {
-    const pattern = { cmd: 'sum' };
-    const payload = [1, 2, 3];
-    return this.client.send<number>(pattern, payload);
-  }
-
   @Post('save')
   async save(@Body() params: addPageDto) {
-    const page = await this.pageService.save(params)
+    const page = await this.pageService.saveAndUpdate(params)
     return page;
   }
 
@@ -81,15 +71,6 @@ export class PageController {
     return {
       filePath: join(process.cwd(), 'package.json')
     }
-  }
-
-  @IsStream()
-  @Public()
-  @Get('getStream')
-  getStream(): StreamableFile {
-    console.log(join(process.cwd(), 'package.json'))
-    const file = createReadStream(join(process.cwd(), 'package.json'));
-    return new StreamableFile(file);
   }
 
   @Post('updateOne')
