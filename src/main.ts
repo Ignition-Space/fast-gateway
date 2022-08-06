@@ -44,11 +44,19 @@ async function bootstrap() {
     secret: 'my-secret', // for cookies signature
   });
 
+  // app.enableCors({
+  //   credentials: true,
+  //   origin: (requestOrigin, callback) => {
+  //     callback(null, requestOrigin);
+  //   },
+  //   methods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
+  // });
+
   // 异常过滤器
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());
 
   // 设置全局接口前缀
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', { exclude: ['*'] });
 
   // 格式化 cookie
   app.use(cookieParser());
@@ -65,7 +73,7 @@ async function bootstrap() {
   generateDocument(app)
 
   // 启动服务
-  await app.listen(3000);
+  await app.listen(80);
 
   // 添加热更新
   if (module.hot) {

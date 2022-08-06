@@ -9,6 +9,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import * as redisStore from 'cache-manager-redis-store';
 import { getConfig } from './utils';
 import { materialsModule } from './materials/materials.module';
+import { IntercepterModule } from './core/intercepter.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { materialsModule } from './materials/materials.module';
       load: [getConfig]
     }),
     AuthModule,
-    materialsModule
+    materialsModule,
+    IntercepterModule
   ],
   controllers: [],
   providers: [

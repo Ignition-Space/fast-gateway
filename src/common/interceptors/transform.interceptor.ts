@@ -22,13 +22,13 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response<T>> {
+
     const IS_STREAM = this.reflector.getAllAndOverride<boolean>(IS_STREAM_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
 
     if (IS_STREAM) return next.handle().pipe()
-
     return next.handle().pipe(
       map((data) => ({
         data,

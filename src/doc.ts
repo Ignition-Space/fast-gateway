@@ -14,7 +14,7 @@ export const generateDocument = (app) => {
     .setVersion(packageConfig.version)
     .build();
 
-  const document = SwaggerModule.createDocument(app, options);
+  const document = SwaggerModule.createDocument(app, options,);
 
-  SwaggerModule.setup('/api/doc', app, document);
+  SwaggerModule.setup('/doc', app, document);
 }
