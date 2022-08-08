@@ -18,6 +18,7 @@ import { Public } from './constants';
 import { PayloadUser } from '@app/common';
 import { FeishuService } from '../userCenter/user/feishu/feishu.service';
 import { FastifyReply } from 'fastify'
+import { MessagePattern } from '@nestjs/microservices';
 
 @ApiTags('用户认证')
 @Controller('auth')

@@ -1,6 +1,6 @@
 import { CacheModule, Module } from '@nestjs/common';
 
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
 import { ConfigModule } from '@nestjs/config';
 import { TransformInterceptor, getConfig } from '@app/common';
@@ -9,6 +9,10 @@ import { MaterialModule } from './materials/material/material.module';
 import { ProjectModule } from './materials/project/project.module';
 import { TaskModule } from './materials/task/task.module';
 import * as redisStore from 'cache-manager-redis-store';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { AuthModule } from './auth/auth.module';
+import { MicroservicesModule } from './microservices/microservices.module';
+import { PermissionGuard } from './auth/guards/permission.guard';
 
 @Module({
   imports: [
@@ -25,16 +29,26 @@ import * as redisStore from 'cache-manager-redis-store';
       isGlobal: true,
       load: [getConfig]
     }),
+    MicroservicesModule,
     GroupModule,
     TaskModule,
     MaterialModule,
-    ProjectModule
+    ProjectModule,
+    AuthModule
   ],
   controllers: [],
   providers: [
     {
       provide: APP_INTERCEPTOR,
       useClass: TransformInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
     },
   ],
 })
