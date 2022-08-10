@@ -24,11 +24,7 @@ async function bootstrap() {
   // 初始化 fastify 
   const fastifyInstance = fastify({
     logger: FastifyLogger,
-    // logger: true
   })
-
-  // fastify hook 拦截器
-  // fastHook(fastifyInstance)
 
   // 创建 NEST 实例
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -39,14 +35,6 @@ async function bootstrap() {
   app.register(fastifyCookie, {
     secret: 'my-secret', // for cookies signature
   });
-
-  // app.enableCors({
-  //   credentials: true,
-  //   origin: (requestOrigin, callback) => {
-  //     callback(null, requestOrigin);
-  //   },
-  //   methods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
-  // });
 
   // 异常过滤器
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter());

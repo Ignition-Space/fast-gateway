@@ -25,7 +25,6 @@ import { IntercepterModule } from './core/intercepter.module';
     }),
     IntercepterModule
   ],
-  controllers: [],
   providers: [
     {
       provide: APP_INTERCEPTOR,
