@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: "gateway",
-    script: "dist/main.js",
+    script: "dist/src/main.js",
     env_production: {
       RUNNING_ENV: "prod"
     },

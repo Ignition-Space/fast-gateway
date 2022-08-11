@@ -8,9 +8,11 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build --webpack",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "cross-env RUNNING_ENV=dev nest start --watch",
+    "start:gateway": "cross-env RUNNING_ENV=dev nest start --watch",
+    "start:user": "cross-env RUNNING_ENV=dev nest start --watch user-center",
+    "start:materials": "cross-env RUNNING_ENV=dev nest start --watch materials",
     "start:hotdev": "cross-env RUNNING_ENV=dev nest build --webpack --webpackPath webpack-hmr.config.js --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "nest build --webpack && pm2 start ecosystem.config.js --env production",
@@ -19,21 +21,21 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/fast-gateway/test/jest-e2e.json"
   },
   "dependencies": {
-    "@fastify/cookie": "^7.0.0",
+    "@fastify/cookie": "7.0.0",
     "@fastify/static": "^6.4.0",
-    "@nestjs/axios": "^0.0.8",
-    "@nestjs/common": "^8.0.0",
-    "@nestjs/config": "^2.0.0",
+    "@nestjs/axios": "^0.1.0",
+    "@nestjs/common": "^9.0.5",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.1",
-    "@nestjs/jwt": "^8.0.0",
-    "@nestjs/microservices": "^8.4.7",
+    "@nestjs/jwt": "^9.0.0",
+    "@nestjs/microservices": "^9.0.5",
     "@nestjs/mongoose": "^9.0.3",
-    "@nestjs/passport": "^8.2.1",
-    "@nestjs/platform-express": "^8.0.0",
-    "@nestjs/platform-fastify": "^9.0.1",
+    "@nestjs/passport": "^9.0.0",
+    "@nestjs/platform-express": "^9.0.5",
+    "@nestjs/platform-fastify": "9.0.1",
     "@nestjs/swagger": "^6.0.1",
     "@types/cache-manager": "^3.4.3",
     "cache-manager": "^3.6.1",
@@ -45,10 +47,11 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.0",
     "fast-json-parse": "^1.0.3",
-    "fastify": "^4.2.0",
+    "fastify": "4.2.0",
     "fs-extra": "^10.0.1",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
+    "mock-req-res": "^1.2.1",
     "mongoose": "^6.2.10",
     "mysql2": "^2.3.3",
     "nestjs-typeorm-paginate": "^4.0.0",
@@ -60,14 +63,15 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "sinon": "^14.0.0",
     "split2": "^4.1.0",
     "typeorm": "^0.3.5",
     "yaml": "^2.0.0"
   },
   "devDependencies": {
-    "@nestjs/cli": "^8.0.0",
-    "@nestjs/schematics": "^8.0.0",
-    "@nestjs/testing": "^8.0.0",
+    "@nestjs/cli": "^9.0.0",
+    "@nestjs/schematics": "^9.0.1",
+    "@nestjs/testing": "^9.0.5",
     "@types/express": "^4.17.13",
     "@types/jest": "27.4.1",
     "@types/node": "^16.0.0",
@@ -96,7 +100,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -104,7 +108,14 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@app/common(|/.*)$": "<rootDir>/libs/common/src/$1"
+    }
   }
 }
