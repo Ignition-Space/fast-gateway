@@ -22,7 +22,9 @@ catchError()
 async function bootstrap() {
   // 初始化 fastify 
   const fastifyInstance = fastify({
-    logger: FastifyLogger,
+    logger: FastifyLogger({
+      fileName: 'user-center'
+    }),
   })
 
   // 创建 NEST 实例

@@ -23,7 +23,9 @@ async function bootstrap() {
 
   // 初始化 fastify 
   const fastifyInstance = fastify({
-    logger: FastifyLogger,
+    logger: FastifyLogger({
+      fileName: 'fast-gateway'
+    }),
   })
 
   // 创建 NEST 实例
