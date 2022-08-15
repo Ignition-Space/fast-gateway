@@ -4,7 +4,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { getConfig } from '@/utils';
+import { getConfig } from '@app/common';
+
 import { WebSiteDataModel } from './types';
 
 const { CACHE_ENABLE, ROOT_DIR, GATEWAY_FILENAME, PAGE_DIR } = getConfig('GATEWAY_CONFIG')
