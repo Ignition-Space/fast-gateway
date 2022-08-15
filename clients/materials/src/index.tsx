@@ -1,30 +1,32 @@
 /*
  * @Author: Cookie
  * @Date: 2021-07-18 15:49:12
- * @LastEditors: Cookie
- * @LastEditTime: 2021-07-18 16:53:32
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-08-12 23:22:18
  * @Description:
  */
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { HashRouter, Route, Switch } from 'react-router-dom'
-import routerConfig from './router/index'
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import routes from '@/router';
+import NestedRoute from '@/router/NestedRoute';
 import './base.less'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <HashRouter>
+const container = document.getElementById('root') as HTMLElement;
+
+const root = createRoot(container);
+
+root.render(
+  <div className="body">
+    <BrowserRouter>
       <Switch>
         {
-          routerConfig.routes.map((route) => {
-            return (
-              <Route key={route.path} {...route} />
-            )
-          })
+          routes.map((item, index) => (
+            <NestedRoute {...item} key={index} />
+          ))
         }
+        <Redirect to="/" exact />
       </Switch>
-    </HashRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+    </BrowserRouter>
+  </div>,
+);
