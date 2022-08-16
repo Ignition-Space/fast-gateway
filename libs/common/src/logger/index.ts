@@ -18,7 +18,6 @@ let logOpt = {
       }
     },
   },
-  fileName: join(process.cwd(), 'logs/fast-gateway.log'), // 文件路径  
   maxBufferLength: 4096, // 日志写入缓存队列最大长度
   flushInterval: 1000, // flush间隔
   logRotator: { // 分割配置
@@ -28,4 +27,9 @@ let logOpt = {
   }
 }
 
-export const FastifyLogger = fastLogger(logOpt)
+export const FastifyLogger = (params) => {
+  return fastLogger({
+    ...logOpt,
+    fileName: join(process.cwd(), `logs/${params.fileName}.log`), // 文件路径  
+  })
+}

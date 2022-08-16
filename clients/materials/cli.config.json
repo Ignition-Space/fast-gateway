@@ -1,0 +1,10 @@
+{
+  "entry": {
+    "app": "./src/index.tsx"
+  },
+  "output": {
+    "filename": "build.[contenthash].js",
+    "path": "./dist"
+  },
+  "template": "tpl/index.html"
+}

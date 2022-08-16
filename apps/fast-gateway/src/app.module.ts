@@ -3,9 +3,8 @@ import { CacheModule, Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 import { ConfigModule } from '@nestjs/config';
-import { TransformInterceptor } from '@app/common';
+import { TransformInterceptor, getConfig } from '@app/common';
 import * as redisStore from 'cache-manager-redis-store';
-import { getConfig } from './utils';
 import { IntercepterModule } from './core/intercepter.module';
 
 @Module({
